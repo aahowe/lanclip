@@ -1,0 +1,14 @@
+services:
+  lanclip:
+    image: ghcr.io/aahowe/lanclip:latest
+    # build: .   # uncomment to build from source instead
+    container_name: lanclip
+    restart: unless-stopped
+    ports:
+      - "9501:9501"
+    volumes:
+      - ./data:/data
+    environment:
+      LANCLIP_TTL: 168h            # how long items are kept; 0 = forever
+      LANCLIP_MAX_ITEMS: "200"     # oldest items are dropped beyond this
+      LANCLIP_MAX_FILE_MB: "4096"  # per-file size limit
